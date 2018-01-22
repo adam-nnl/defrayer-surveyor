@@ -1,0 +1,4 @@
+#!/bin/bash
+
+char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)
+sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" /var/xmr-stak/build/bin/config.txt
