@@ -29,10 +29,10 @@
 
   "Mappings" : {
     "AWSRegion2AMI" : {
-      "us-east-1"        : { "AMI" : "ami-49c0f433" },
-      "us-east-2"        : { "AMI" : "ami-61a98304" },
-      "us-west-1"        : { "AMI" : "ami-f4010c94" },
-      "us-west-2"        : { "AMI" : "ami-650db01d" }
+      "us-east-1"        : { "AMI" : "ami-f776418d" },
+      "us-east-2"        : { "AMI" : "ami-3ebe945b" },
+      "us-west-1"        : { "AMI" : "ami-081e1368" },
+      "us-west-2"        : { "AMI" : "ami-03f74b7b" }
       }
   },
 
@@ -113,13 +113,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -131,13 +127,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -149,13 +141,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -167,13 +155,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -185,13 +169,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -203,13 +183,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -221,13 +197,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -239,13 +211,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -272,13 +240,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -290,13 +254,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -308,13 +268,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -341,13 +297,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -359,13 +311,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -377,13 +325,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -395,13 +339,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -413,13 +353,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -446,13 +382,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -464,13 +396,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -482,13 +410,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -500,13 +424,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -518,13 +438,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -536,13 +452,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -554,13 +466,9 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
@@ -572,13 +480,10 @@
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "cd /var/xmr-stak/build/bin",
-                        "sysctl -w vm.nr_hugepages=128",
-                        "echo "* soft memlock 262144" >> /etc/security/limits.conf",
-                        "echo "* hard memlock 262144" >> /etc/security/limits.conf",
-                        "char_random_number=$(cat /dev/urandom | tr -dc 'a-z0-9' | fold -w 16 | head -n 1)",
-                        "sed -i.bkp "s/\(J8wU.1\)/\1$char_random_number/g" config.txt",
-                        "./xmr-stak",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
                         "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
                     ]]}}
