@@ -21,12 +21,12 @@ us-east-2 ami-e4b89281
 us-west-1 ami-95030ef5
 us-west-2 ami-8209b4fa
 
-t2.xlarge
-t2.2xlarge
-m4.xlarge
-m4.2xlarge
-m4.4xlarge
-c4.xlarge
-c4.2xlarge
-c4.4xlarge
-c4.8xlarge
+4 t2.xlarge
+8 t2.2xlarge
+4 m4.xlarge
+8 m4.2xlarge
+16 m4.4xlarge
+4 c4.xlarge
+8 c4.2xlarge
+16 c4.4xlarge
+36 c4.8xlarge
