@@ -29,10 +29,10 @@
 
   "Mappings" : {
     "AWSRegion2AMI" : {
-      "us-east-1"        : { "AMI" : "ami-ffa69285" },
-      "us-east-2"        : { "AMI" : "ami-e4b89281" },
-      "us-west-1"        : { "AMI" : "ami-95030ef5" },
-      "us-west-2"        : { "AMI" : "ami-8209b4fa" }
+      "us-east-1"        : { "AMI" : "ami-b23b0cc8" },
+      "us-east-2"        : { "AMI" : "ami-45b69c20" },
+      "us-west-1"        : { "AMI" : "ami-49101d29" },
+      "us-west-2"        : { "AMI" : "ami-b2da66ca" }
       }
   },
 
@@ -107,99 +107,129 @@
                 "TargetCapacity": { "Ref": "FleetSize" },
                 "LaunchSpecifications": [
                 {
-                    "InstanceType": "g3.4xlarge",
+                    "InstanceType": "t2.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.8xlarge",
+                    "InstanceType": "t2.2xlarge",
                     "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.16xlarge",
-                    "WeightedCapacity": 4,
-                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
-                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
-                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
-                        "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
-                        { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
-                    ]]}}
-                },
-                {
-                    "InstanceType": "g2.2xlarge",
+                    "InstanceType": "m4.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g2.8xlarge",
-                    "WeightedCapacity": 4,
+                    "InstanceType": "m4.2xlarge",
+                    "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "p2.xlarge",
+                    "InstanceType": "m4.4xlarge",
+                    "WeightedCapacity": 3,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                {
+                    "InstanceType": "c4.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                                 {
-                    "InstanceType": "p2.8xlarge",
-                    "WeightedCapacity": 8,
+                    "InstanceType": "c4.2xlarge",
+                    "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
-                {
-                    "InstanceType": "p2.16xlarge",
-                    "WeightedCapacity": 16,
+                                {
+                    "InstanceType": "c4.4xlarge",
+                    "WeightedCapacity": 3,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },				
+                {
+                    "InstanceType": "c4.8xlarge",
+                    "WeightedCapacity": 6,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 }
                 ]
@@ -218,39 +248,129 @@
                 "TargetCapacity": { "Ref": "FleetSize" },
                 "LaunchSpecifications": [
                 {
-                    "InstanceType": "g3.4xlarge",
+                    "InstanceType": "t2.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.8xlarge",
+                    "InstanceType": "t2.2xlarge",
                     "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.16xlarge",
-                    "WeightedCapacity": 4,
+                    "InstanceType": "m4.xlarge",
+                    "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                {
+                    "InstanceType": "m4.2xlarge",
+                    "WeightedCapacity": 2,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                {
+                    "InstanceType": "m4.4xlarge",
+                    "WeightedCapacity": 3,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                {
+                    "InstanceType": "c4.xlarge",
+                    "WeightedCapacity": 1,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                                {
+                    "InstanceType": "c4.2xlarge",
+                    "WeightedCapacity": 2,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                                {
+                    "InstanceType": "c4.4xlarge",
+                    "WeightedCapacity": 3,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },				
+                {
+                    "InstanceType": "c4.8xlarge",
+                    "WeightedCapacity": 6,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 }
                 ]
@@ -269,63 +389,129 @@
                 "TargetCapacity": { "Ref": "FleetSize" },
                 "LaunchSpecifications": [
                 {
-                    "InstanceType": "g3.4xlarge",
+                    "InstanceType": "t2.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.8xlarge",
+                    "InstanceType": "t2.2xlarge",
                     "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.16xlarge",
-                    "WeightedCapacity": 4,
-                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
-                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
-                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
-                        "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
-                        { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
-                    ]]}}
-                },
-                {
-                    "InstanceType": "g2.2xlarge",
+                    "InstanceType": "m4.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g2.8xlarge",
-                    "WeightedCapacity": 4,
+                    "InstanceType": "m4.2xlarge",
+                    "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                {
+                    "InstanceType": "m4.4xlarge",
+                    "WeightedCapacity": 3,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                {
+                    "InstanceType": "c4.xlarge",
+                    "WeightedCapacity": 1,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                                {
+                    "InstanceType": "c4.2xlarge",
+                    "WeightedCapacity": 2,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                                {
+                    "InstanceType": "c4.4xlarge",
+                    "WeightedCapacity": 3,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },				
+                {
+                    "InstanceType": "c4.8xlarge",
+                    "WeightedCapacity": 6,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 }
                 ]
@@ -344,99 +530,129 @@
                 "TargetCapacity": { "Ref": "FleetSize" },
                 "LaunchSpecifications": [
                 {
-                    "InstanceType": "g3.4xlarge",
+                    "InstanceType": "t2.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.8xlarge",
+                    "InstanceType": "t2.2xlarge",
                     "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g3.16xlarge",
-                    "WeightedCapacity": 4,
-                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
-                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
-                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
-                        "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
-                        { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
-                    ]]}}
-                },
-                {
-                    "InstanceType": "g2.2xlarge",
+                    "InstanceType": "m4.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "g2.8xlarge",
-                    "WeightedCapacity": 4,
+                    "InstanceType": "m4.2xlarge",
+                    "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                 {
-                    "InstanceType": "p2.xlarge",
+                    "InstanceType": "m4.4xlarge",
+                    "WeightedCapacity": 3,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },
+                {
+                    "InstanceType": "c4.xlarge",
                     "WeightedCapacity": 1,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
                                 {
-                    "InstanceType": "p2.8xlarge",
-                    "WeightedCapacity": 8,
+                    "InstanceType": "c4.2xlarge",
+                    "WeightedCapacity": 2,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 },
-                {
-                    "InstanceType": "p2.16xlarge",
-                    "WeightedCapacity": 16,
+                                {
+                    "InstanceType": "c4.4xlarge",
+                    "WeightedCapacity": 3,
                     "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
                     "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
                     "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
                         "#!/bin/bash -xe\n",
-                        "ethminer -U -F http://eth-us-east1.nanopool.org:8888/", 
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
                         { "Ref" : "Wallet" },
-                        "/aws$(ec2metadata --instance-id)/a@b.com --cuda-devices $(nvidia-smi | grep 'Off' | awk '{print $2}' ORS=' ') --farm-recheck 200" 
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
+                    ]]}}
+                },				
+                {
+                    "InstanceType": "c4.8xlarge",
+                    "WeightedCapacity": 6,
+                    "ImageId": { "Fn::FindInMap": [ "AWSRegion2AMI", { "Ref" : "AWS::Region" }, "AMI" ] },
+                    "SecurityGroups": [ { "GroupId": { "Fn::GetAtt": [ "InstanceSecurityGroup", "GroupId" ] } } ],
+                    "UserData" : { "Fn::Base64" : { "Fn::Join" : [ "", [ 
+                        "#!/bin/bash -xe\n",
+                        "cd /var/xmr-stak/build/bin\n",
+                        "./unique-worker\n",
+                        "./xmr-stak\n",
+                        { "Ref" : "Wallet" },
+                        "/aws$(ec2metadata --instance-id) --farm-recheck 200"
                     ]]}}
                 }
                 ]
