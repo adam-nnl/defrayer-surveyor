@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "AWS CloudFormation Template to launch a Spot Fleet of Ether mining instances",
+  "Description" : "AWS CloudFormation Template to launch a Spot Fleet of XMR mining instances for reseach and benchmarking",
 
   "Parameters" : {
     "FleetSize" : {
@@ -96,7 +96,7 @@
             } ]
          }
      },
-     "EtherSpotFleetuseast1": {
+     "XMRSpotFleetuseast1": {
         "Type": "AWS::EC2::SpotFleet",
         "Condition": "useast1",
         "Properties": {
@@ -237,7 +237,7 @@
         }
     },
 
-     "EtherSpotFleetuseast2": {
+     "XMRSpotFleetuseast2": {
         "Type": "AWS::EC2::SpotFleet",
         "Condition": "useast2",
         "Properties": {
@@ -378,7 +378,7 @@
         }
     },
 
-     "EtherSpotFleetuswest1": {
+     "XMRSpotFleetuswest1": {
         "Type": "AWS::EC2::SpotFleet",
         "Condition": "uswest1",
         "Properties": {
@@ -519,7 +519,7 @@
         }
     },
 
-     "EtherSpotFleetuswest2": {
+     "XMRSpotFleetuswest2": {
         "Type": "AWS::EC2::SpotFleet",
         "Condition": "uswest2",
         "Properties": {
