@@ -1,7 +1,7 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
 
-  "Description" : "AWS CloudFormation Template to launch a Spot Fleet of Ether mining instances",
+  "Description" : "AWS CloudFormation Template to launch a Spot Fleet of XMR mining instances with GPUs for research and benchmarking",
 
   "Parameters" : {
     "FleetSize" : {
